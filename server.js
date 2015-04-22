@@ -11,7 +11,7 @@ app.use(morgan('combined'));
 
 // API routes
 app.get('/ping', function (req, res) {
-  res.json({data: 'aapong'});
+  res.json({data: 'pong'});
 });
 
 app.get('/hello/:name', function (req, res) {
