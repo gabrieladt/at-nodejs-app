@@ -3,13 +3,12 @@ FROM ubuntu:14.04
 RUN apt-get update
 
 # install nodejs and npm
-RUN apt-get install -y nodejs npm 
+RUN apt-get install -y nodejs npm git git-core
 
-RUN	mkdir /app
-WORKDIR   /app
-VOLUME ["/app/"]
+ADD start.sh /tmp/
 
-RUN npm install
-RUN node .
+RUN chmod +x /tmp/start.sh
+
+CMD ./tmp/start.sh
 
 EXPOSE 3000
