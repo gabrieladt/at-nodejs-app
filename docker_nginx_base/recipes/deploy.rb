@@ -41,15 +41,15 @@ package "jq" do
 	action :install
 end 
 
-#service "docker.io" do
+#service "docker" do
 #  provider Chef::Provider::Service::Upstart
 #  supports :status => true, :restart => true, :reload => true
 #end
 
 #package "docker" do
-#        package_name "docker.io"
+#        package_name "docker"
 #        action :install
-#        notifies :restart, resources(:service => "docker.io"), :immediate
+#        notifies :restart, resources(:service => "docker"), :immediate
 #end
 
 node[:docker_nginx_server].each do |name, image|
@@ -60,36 +60,36 @@ node[:docker_nginx_server].each do |name, image|
 docker pull #{image}
 
 
-/usr/bin/docker.io ps -a | grep #{name} | grep Exited
+/usr/bin/docker ps -a | grep #{name} | grep Exited
 if [ $? -eq 0 ]; then
-	/usr/bin/docker.io stop #{name} 
-	/usr/bin/docker.io rm #{name} 
+	/usr/bin/docker stop #{name} 
+	/usr/bin/docker rm #{name} 
 	docker run --name #{name} -d -p 80:80 -p 443:443 -v /nginx_base/sites-enabled:/etc/nginx/sites-enabled -v /nginx_base/certs:/etc/nginx/certs -v /nginx_base/logs:/var/log/nginx -v /nginx_base/www:/var/www/html -v /nginx_base/conf.d:/etc/nginx/conf.d  #{image} 
 fi
 
-/usr/bin/docker.io ps -a | grep #{name}
+/usr/bin/docker ps -a | grep #{name}
 if [ $? -ne 0 ]; then
 	docker run --name #{name} -d -p 80:80 -p 443:443 -v /nginx_base/sites-enabled:/etc/nginx/sites-enabled -v /nginx_base/certs:/etc/nginx/certs -v /nginx_base/logs:/var/log/nginx -v /nginx_base/www:/var/www/html -v /nginx_base/conf.d:/etc/nginx/conf.d  #{image} 
 fi
 
 
-/usr/bin/docker.io ps -a | grep #{name} | grep -v "Up " 
+/usr/bin/docker ps -a | grep #{name} | grep -v "Up " 
 if [ $? -eq 0 ]; then
-        service docker.io restart
-        /usr/bin/docker.io rm -f #{name} 
+        service docker restart
+        /usr/bin/docker rm -f #{name} 
         docker run --name #{name} -d -p 80:80 -p 443:443 -v /nginx_base/sites-enabled:/etc/nginx/sites-enabled -v /nginx_base/certs:/etc/nginx/certs -v /nginx_base/logs:/var/log/nginx -v /nginx_base/www:/var/www/html -v /nginx_base/conf.d:/etc/nginx/conf.d  #{image} 
 fi
 
 
-/usr/bin/docker.io ps -a | grep #{name} | awk '{print $1}'| while read i 
+/usr/bin/docker ps -a | grep #{name} | awk '{print $1}'| while read i 
         do 
         LATEST=`docker inspect --format "{{.Id}}" #{image}`
         RUNNING=`docker inspect --format "{{.Image}}" $i`
         echo "Latest:" $LATEST
         echo "Running:" $RUNNING
         if [ "$RUNNING" != "$LATEST" ];then
-                /usr/bin/docker.io stop $i 
-                /usr/bin/docker.io rm $i 
+                /usr/bin/docker stop $i 
+                /usr/bin/docker rm $i 
                 docker run --name #{name} -d -p 80:80 -p 443:443 -v /nginx_base/sites-enabled:/etc/nginx/sites-enabled -v /nginx_base/certs:/etc/nginx/certs -v /nginx_base/logs:/var/log/nginx -v /nginx_base/www:/var/www/html -v /nginx_base/conf.d:/etc/nginx/conf.d  #{image} 
 		sleep 3
         else
