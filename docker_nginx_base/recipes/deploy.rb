@@ -114,7 +114,7 @@ done
         end
 
 end
-node[:apps_containers].each do |name, image|
+node[:apps_containers_dev].each do |name, image|
 
         template "/nginx_base/conf.d/#{name}_upstream.conf" do
                 source "upstream.conf.erb"
@@ -141,4 +141,32 @@ node[:apps_containers].each do |name, image|
                 notifies :run, "execute[docker_hup_nginx_base]", :immediately
         end
 end
+node[:apps_containers_prod].each do |name, image|
+
+        template "/nginx_base/conf.d/#{name}_upstream.conf" do
+                source "upstream.conf.erb"
+                mode 0755
+                group 'root'
+                owner 'root'
+                variables(
+                        :app_name => "#{name}",
+                        :host => "172.17.42.1",
+                        :port => "#{node[name][:docker_port]}"
+                )
+                notifies :run, "execute[docker_hup_nginx_base]", :immediately
+        end
+
+        template "/nginx_base/sites-enabled/#{name}_vhost.conf" do
+                source "app_nginx_external.conf.erb"
+                mode 0755
+                group 'root'
+                owner 'root'
+                variables(
+                        :app_name => "#{name}",
+                        :domain => " #{node[name][:domain]}"
+                )
+                notifies :run, "execute[docker_hup_nginx_base]", :immediately
+        end
+end
+
 
