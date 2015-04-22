@@ -1,0 +1,3 @@
+--reporter mocha-jenkins-reporter
+--ui bdd
+--recursive
