@@ -9,4 +9,4 @@ cd at-nodejs-app
 
 npm install
 
-node .
+nodejs .
