@@ -1,0 +1,34 @@
+{
+	"apps_containers_dev": {
+		"app1_dev": "develop:latest"
+	},
+	"apps_containers_prod": {
+		"app1_prod": "master:latest"
+	},
+	"docker_nginx_server": {
+		"nginx_base_official": "gabrieladt/docker-nginx-base"
+	},
+	"app1_dev":{
+		"domain":"devat.com",
+		"docker_port":"5001"
+	},
+	"app1_prod":{
+		"domain":"prodat.com",
+		"docker_port":"5002"
+	},	
+	"opsworks": {
+		"layers": {
+			"dedalus-infra": {
+				"instances": {
+					"docker-master": {"private-ip": "10.10.10.10"}
+				}
+			}
+		}
+	},
+	"opsworks_custom_cookbooks": {
+		"enabled": true,
+		"scm": {
+			"repository": "./"
+		}
+	}
+}

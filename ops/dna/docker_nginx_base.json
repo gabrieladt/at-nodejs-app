@@ -1,0 +1,18 @@
+{
+  "opsworks_custom_cookbooks": {
+    "recipes": [
+      "recipe[opsworks_initial_setup]",
+      "recipe[ssh_host_keys]",
+      "recipe[ssh_users]",
+      "recipe[dependencies]",
+      "recipe[ebs]",
+      "recipe[opsworks_ganglia::client]",
+      "recipe[opsworks_ganglia::configure-client]",
+      "recipe[agent_version]",
+      "recipe[docker_nginx_base::setup]",
+      "recipe[docker_nginx_base::kill_containers]",
+      "recipe[docker_nginx_base::pull_images]",
+      "recipe[docker_nginx_base::run_containers]"
+    ]
+  }
+}
