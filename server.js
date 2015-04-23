@@ -18,6 +18,10 @@ app.get('/hello/:name', function (req, res) {
   res.json({data: 'Hello, ' + req.params.name});
 });
 
+app.get('/gf/:name', function (req, res) {
+  res.json({data: 'GF, ' + req.params.name});
+});
+
 // On `ready` & `error` handling.
 server.on('error', function onError(err) {
   server.errorEmitted = err;
