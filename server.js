@@ -8,7 +8,7 @@ var server = http.createServer(app);
 
 // setup request logging
 app.use(morgan('combined'));
-//gf
+
 // API routes
 app.get('/ping', function (req, res) {
   res.json({data: 'pong'});
