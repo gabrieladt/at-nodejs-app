@@ -14,7 +14,8 @@ Vagrant.configure("2") do |config|
 	# Configure our provisioner script
 	config.vm.synced_folder 'ops/provisioner', '/tmp/provisioner'
 	config.vm.provision :opsworks, type: 'shell' do |shell|
-		shell.inline = 'if [ ! -f /usr/bin/docker ]; then apt-get update; apt-get -y install linux-image-extra-$(uname -r); modprobe aufs; wget -qO- https://get.docker.com/ | sh; fi; /bin/bash /tmp/provisioner/opsworks "$@"'
+		#shell.inline = 'if [ ! -f /usr/bin/docker ]; then apt-get update; apt-get -y install linux-image-extra-$(uname -r); modprobe aufs; wget -qO- https://get.docker.com/ | sh; fi;/bin/bash /tmp/provisioner/build_vagrant.sh'
+		shell.inline = 'if [ ! -f /usr/bin/docker ]; then apt-get update; apt-get -y install linux-image-extra-$(uname -r); modprobe aufs; wget -qO- https://get.docker.com/ | sh; fi;/bin/bash /tmp/provisioner/build_vagrant.sh; /bin/bash /tmp/provisioner/opsworks "$@"'
 	end
 
 	# Define our app layer
