@@ -9,6 +9,7 @@
       "recipe[opsworks_ganglia::client]",
       "recipe[opsworks_ganglia::configure-client]",
       "recipe[agent_version]",
+      "recipe[docker_nginx_base::deploy]",
       "recipe[dev_apps::deploy]",
       "recipe[prod_apps::deploy]" 
     ]
