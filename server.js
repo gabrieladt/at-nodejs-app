@@ -6,6 +6,7 @@ var http = require('http');
 var app = express();
 var server = http.createServer(app);
 
+
 // setup request logging
 app.use(morgan('combined'));
 
