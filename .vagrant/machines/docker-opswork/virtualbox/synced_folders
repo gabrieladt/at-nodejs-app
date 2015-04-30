@@ -1,1 +1,0 @@
-{"virtualbox":{"/tmp/provisioner":{"guestpath":"/tmp/provisioner","hostpath":"/home/gabriel.ferreira/Documentos/tmp/at-nodejs-app/ops/provisioner","disabled":false},"/vagrant":{"guestpath":"/vagrant","hostpath":"/home/gabriel.ferreira/Documentos/tmp/at-nodejs-app","disabled":false}}}
