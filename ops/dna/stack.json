@@ -4,6 +4,7 @@
 	},
 	"apps_containers_prod": {
 		"app1_prod": "master:latest"
+		"app3_prod": "xxxxx:latest"
 	},
 	"docker_nginx_server": {
 		"nginx_base_official": "gabrieladt/docker-nginx-base"
