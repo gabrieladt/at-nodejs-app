@@ -10,6 +10,13 @@ var server = http.createServer(app);
 // setup request logging
 app.use(morgan('combined'));
 
+app.get('/aaaa', function (req, res) {
+  res.json({data: 'bbbb'});
+});
+
+app.get('/ping', function (req, res) {
+  res.json({data: 'pong'});
+});
 // API routes
 app.get('/ping', function (req, res) {
   res.json({data: 'pong'});
