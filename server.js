@@ -15,6 +15,10 @@ app.get('/aaaa', function (req, res) {
   res.json({data: 'bbbb'});
 });
 
+app.get('/bbbb', function (req, res) {
+  res.json({data: 'bbbb'});
+});
+
 app.get('/ping', function (req, res) {
   res.json({data: 'pong'});
 });
