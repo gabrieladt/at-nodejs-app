@@ -15,8 +15,8 @@ app.get('/aaaa', function (req, res) {
   res.json({data: 'bbbb'});
 });
 
-app.get('/bbbb', function (req, res) {
-  res.json({data: 'bbbb'});
+app.get('/cccc', function (req, res) {
+  res.json({data: 'cccc'});
 });
 
 app.get('/ping', function (req, res) {
