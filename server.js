@@ -15,7 +15,7 @@ app.get('/aaaa', function (req, res) {
   res.json({data: 'bbbb'});
 });
 
-app.get('/cccc', function (req, res) {
+app.get('/dddd', function (req, res) {
   res.json({data: 'cccc'});
 });
 
