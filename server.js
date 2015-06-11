@@ -11,8 +11,8 @@ var server = http.createServer(app);
 app.use(morgan('combined'));
 
 
-app.get('/aaaa', function (req, res) {
-  res.json({data: 'bbbb'});
+app.get('/xxxx', function (req, res) {
+  res.json({data: 'xxxx'});
 });
 
 app.get('/dddd', function (req, res) {
